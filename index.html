@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Welcome to Tic Tac Toe game! Begin Playing</h1>
+    <p id="player">
+    </p>
+    <p class="purple">Click on any the box to play your move</p>
+    <p id="move">1st Player's Turn!</p>
+    <table>
+        <tr>
+            <td><button onclick="play1()" id="one"><span class="hidden">O</span></button></td>
+            <td><button onclick="play2()" id="two"><span class="hidden">O</span></button></td>
+            <td><button onclick="play3()" id="three"><span class="hidden">O</span></button></td>
+        </tr>
+        <tr>
+            <td><button onclick="play4()" id="four"><span class="hidden">O</span></button></td>
+            <td><button onclick="play5()" id="five"><span class="hidden">O</span></button></td>
+            <td><button onclick="play6()" id="six"><span class="hidden">O</span></button></td>
+        </tr>
+        <tr>
+            <td><button onclick="play7()" id="seven"><span class="hidden">O</span></button></td>
+            <td><button onclick="play8()" id="eight"><span class="hidden">O</span></button></td>
+            <td><button onclick="play9()" id="nine"><span class="hidden">O</span></button></td>
+        </tr>
+    </table>
+
+    <h2 id="result"></h2>
+
+    <a href="index.html">Restart</a>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
