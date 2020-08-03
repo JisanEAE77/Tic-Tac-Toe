@@ -246,6 +246,7 @@ function botchoice(uservalue) {
                 return value;
             },
             five: function () {
+                var kick = pandav();
                 var value;
                 var wlist = winbot();
                 if (wlist[0]) { value = wlist[1]; }
@@ -257,6 +258,7 @@ function botchoice(uservalue) {
                 else if (ids['four'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
                 else if (ids['eight'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
                 else if (ids['two'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
+                else if (kick[0]) { value = kick[1]; }
                 else { value = rand(); }
                 return value;
             }
@@ -379,39 +381,57 @@ function rand() {
 
 function winprotect(hchance, lchance){
 
+    var hcopy = hchance;
+    var lcopy = lchance;
     var hcounter = 3;
     var lcounter = 2;
 
     for(var i = 0; i < 3; i++)
     {
         if (ids[hchance[i]] === 'X' || ids[hchance[i]] === 'O'){
-            hchance.splice(i, 1);
+            hcopy.splice(i, 1);
             hcounter--;
         }
     }  
 
     if(hcounter > 0) {
         var protect = Math.floor(Math.random() * hcounter);
-        value = hchance[protect];
+        value = hcopy[protect];
         return [true, value];
     }
     else{
         for(var i = 0; i< 2; i++) {
             if (ids[lchance[i]] === 'X' || ids[lchance[i]] === 'O') {
-                lchance.splice(i, 1);
+                lcopy.splice(i, 1);
                 lcounter--;
             }
         }
         if (lcounter > 0) {
             var protect = Math.floor(Math.random() * lcounter);
-            value = lchance[protect];
+            value = lcopy[protect];
             return [true, value];
         }
     }
 
     return [false, null];
-
 }
 
+function pandav(){
+    var pandavlist = ['one', 'three', 'seven', 'nine'];
+    var pcopy = pandavlist;
+    var pandavcounter = 4
+    for (var i = 0; i < 4; i++) {
+        if (ids[pandavlist[i]] === 'X' || ids[pandavlist[i]] === 'O') {
+            pcopy.splice(i, 1);
+            pandavcounter--;
+        }
+    }
 
+    if (pandavcounter > 0) {
+        var pandu = Math.floor(Math.random() * pandavcounter);
+        value = pcopy[pandu];
+        return [true, value];
+    }
 
+    return [false, null];
+}
