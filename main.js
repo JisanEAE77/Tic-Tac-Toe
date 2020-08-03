@@ -184,8 +184,8 @@ function botchoice(uservalue) {
                 else if (ids['three'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
                 else if (ids['five'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
                 else if (ids['eight'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
-                else if (ids['six'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
-                else if (ids['four'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (ids['six'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X') && ids['five'] !== 'O') { value = 'four'; }
+                else if (ids['four'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X') && ids['five'] !== 'O') { value = 'six'; }
                 else if (cornerv[0]) { value = cornerv[1]; }
                 else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['nine'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
@@ -206,8 +206,8 @@ function botchoice(uservalue) {
                 else if (ids['seven'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
                 else if (ids['five'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
                 else if (ids['six'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
-                else if (ids['two'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
-                else if (ids['eight'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
+                else if (ids['two'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X') && ids['five'] !== 'O') { value = 'eight'; }
+                else if (ids['eight'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X') && ids['five'] !== 'O') { value = 'two'; }
                 else if (cornerv[0]) { value = cornerv[1]; }
                 else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['nine'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
@@ -228,8 +228,8 @@ function botchoice(uservalue) {
                 else if (ids['nine'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
                 else if (ids['five'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
                 else if (ids['four'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
-                else if (ids['two'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
-                else if (ids['eight'] === 'X' && (ids['two'] !== 'O' && ids['nine'] !== 'X')) { value = 'two'; }
+                else if (ids['two'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X') && ids['five'] !== 'O') { value = 'eight'; }
+                else if (ids['eight'] === 'X' && (ids['two'] !== 'O' && ids['nine'] !== 'X') && ids['five'] !== 'O') { value = 'two'; }
                 else if (cornerv[0]) { value = cornerv[1]; }
                 else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['one'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
@@ -250,8 +250,8 @@ function botchoice(uservalue) {
                 else if (ids['nine'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
                 else if (ids['five'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
                 else if (ids['two'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
-                else if (ids['six'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
-                else if (ids['four'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (ids['six'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X') && ids['five'] !== 'O') { value = 'four'; }
+                else if (ids['four'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X') && ids['five'] !== 'O') { value = 'six'; }
                 else if (cornerv[0]) { value = cornerv[1]; }
                 else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['three'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
