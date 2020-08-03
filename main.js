@@ -76,9 +76,9 @@ function play(userchoice) {
         }
 
         if (bcheck) {
-            
+            botchoice(userchoice);
         }
-        botchoice(userchoice);
+        
     }
 }
 
@@ -86,6 +86,9 @@ function botchoice(uservalue) {
     if (!gameover) {
         var dict = {
             one: function () {
+                var highchance = ['five', 'two', 'four'];
+                var lowchance = ['three', 'seven'];
+                var passvalue = winprotect(highchance, lowchance);
                 var value;
                 var wlist = winbot();
                 if (wlist[0]) { value = wlist[1]; }
@@ -95,6 +98,7 @@ function botchoice(uservalue) {
                 else if (ids['nine'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['four'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
                 else if (ids['seven'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
+                else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['eight'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
                 else if (ids['six'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
                 else { value = rand(); }
@@ -102,6 +106,9 @@ function botchoice(uservalue) {
                 return value;
             },
             three: function () {
+                var highchance = ['five', 'two', 'six'];
+                var lowchance = ['one', 'nine'];
+                var passvalue = winprotect(highchance, lowchance);
                 var value;
                 var wlist = winbot();
                 if (wlist[0]) { value = wlist[1]; }
@@ -111,12 +118,16 @@ function botchoice(uservalue) {
                 else if (ids['seven'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['six'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
                 else if (ids['nine'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['four'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
                 else if (ids['eight'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
                 else { value = rand(); }
                 return value;
             },
             seven: function () {
+                var highchance = ['five', 'four', 'eight'];
+                var lowchance = ['one', 'nine'];
+                var passvalue = winprotect(highchance, lowchance);
                 var value;
                 var wlist = winbot();
                 if (wlist[0]) { value = wlist[1]; }
@@ -126,6 +137,7 @@ function botchoice(uservalue) {
                 else if (ids['three'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['four'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
                 else if (ids['one'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
+                else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['six'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
                 else if (ids['two'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
                 else { value = rand(); }
@@ -133,6 +145,9 @@ function botchoice(uservalue) {
                 return value;
             },
             nine: function () {
+                var highchance = ['five', 'six', 'eight'];
+                var lowchance = ['three', 'seven'];
+                var passvalue = winprotect(highchance, lowchance);
                 var value;
                 var wlist = winbot();
                 if (wlist[0]) { value = wlist[1]; }
@@ -142,6 +157,7 @@ function botchoice(uservalue) {
                 else if (ids['one'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['six'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
                 else if (ids['three'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['four'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
                 else if (ids['two'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
                 else { value = rand(); }
@@ -149,6 +165,9 @@ function botchoice(uservalue) {
                 return value;
             },
             two: function () {
+                var highchance = ['five', 'one', 'three'];
+                var lowchance = ['four', 'six'];
+                var passvalue = winprotect(highchance, lowchance);
                 var value;
                 var wlist = winbot();
                 if (wlist[0]) { value = wlist[1]; }
@@ -158,6 +177,7 @@ function botchoice(uservalue) {
                 else if (ids['eight'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['six'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
                 else if (ids['four'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['nine'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
                 else if (ids['seven'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
                 else { value = rand(); }
@@ -165,6 +185,9 @@ function botchoice(uservalue) {
                 return value;
             },
             four: function () {
+                var highchance = ['five', 'one', 'seven'];
+                var lowchance = ['two', 'eight'];
+                var passvalue = winprotect(highchance, lowchance);
                 var value;
                 var wlist = winbot();
                 if (wlist[0]) { value = wlist[1]; }
@@ -174,6 +197,8 @@ function botchoice(uservalue) {
                 else if (ids['six'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['two'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
                 else if (ids['eight'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
+                
+                else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['nine'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
                 else if (ids['three'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
                 else { value = rand(); }
@@ -181,6 +206,9 @@ function botchoice(uservalue) {
                 return value;
             },
             six: function () {
+                var highchance = ['five', 'three', 'nine'];
+                var lowchance = ['two', 'eight'];
+                var passvalue = winprotect(highchance, lowchance);
                 var value;
                 var wlist = winbot();
                 if (wlist[0]) { value = wlist[1]; }
@@ -190,6 +218,7 @@ function botchoice(uservalue) {
                 else if (ids['four'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['two'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
                 else if (ids['eight'] === 'X' && (ids['two'] !== 'O' && ids['nine'] !== 'X')) { value = 'two'; }
+                else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['one'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
                 else if (ids['seven'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
                 else { value = rand(); }
@@ -197,6 +226,9 @@ function botchoice(uservalue) {
                 return value;
             },
             eight: function () {
+                var highchance = ['five', 'seven', 'nine'];
+                var lowchance = ['four', 'six'];
+                var passvalue = winprotect(highchance, lowchance);
                 var value;
                 var wlist = winbot();
                 if (wlist[0]) { value = wlist[1]; }
@@ -206,6 +238,7 @@ function botchoice(uservalue) {
                 else if (ids['two'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['six'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
                 else if (ids['four'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['three'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
                 else if (ids['one'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
                 else { value = rand(); }
@@ -234,8 +267,6 @@ function botchoice(uservalue) {
         } else {
             botplay = dict[uservalue.id]();
         }
-
-        console.log(botplay);
 
         if (ids[botplay] !== "X" && ids[botplay] !== "O") {
             ids[botplay] = hit;
@@ -284,8 +315,6 @@ function botchoice(uservalue) {
 
         }
 
-        console.log(ids[botplay]);
-
     }
 }
 
@@ -330,8 +359,6 @@ function winbot() {
 
     var ulist = [ck, value];
 
-    console.log(ulist);
-
     return ulist;
 }
 
@@ -349,3 +376,42 @@ function rand() {
 
     return value;
 }
+
+function winprotect(hchance, lchance){
+
+    var hcounter = 3;
+    var lcounter = 2;
+
+    for(var i = 0; i < 3; i++)
+    {
+        if (ids[hchance[i]] === 'X' || ids[hchance[i]] === 'O'){
+            hchance.splice(i, 1);
+            hcounter--;
+        }
+    }  
+
+    if(hcounter > 0) {
+        var protect = Math.floor(Math.random() * hcounter);
+        value = hchance[protect];
+        return [true, value];
+    }
+    else{
+        for(var i = 0; i< 2; i++) {
+            if (ids[lchance[i]] === 'X' || ids[lchance[i]] === 'O') {
+                lchance.splice(i, 1);
+                lcounter--;
+            }
+        }
+        if (lcounter > 0) {
+            var protect = Math.floor(Math.random() * lcounter);
+            value = lchance[protect];
+            return [true, value];
+        }
+    }
+
+    return [false, null];
+
+}
+
+
+
