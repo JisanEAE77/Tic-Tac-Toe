@@ -86,6 +86,7 @@ function botchoice(uservalue) {
     if (!gameover) {
         var dict = {
             one: function () {
+                var cornerv = cornercheck();
                 var highchance = ['five', 'two', 'four'];
                 var lowchance = ['three', 'seven'];
                 var passvalue = winprotect(highchance, lowchance);
@@ -98,6 +99,7 @@ function botchoice(uservalue) {
                 else if (ids['nine'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['four'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
                 else if (ids['seven'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
+                else if (cornerv[0]) { value = cornerv[1]; }
                 else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['eight'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
                 else if (ids['six'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
@@ -106,6 +108,7 @@ function botchoice(uservalue) {
                 return value;
             },
             three: function () {
+                var cornerv = cornercheck();
                 var highchance = ['five', 'two', 'six'];
                 var lowchance = ['one', 'nine'];
                 var passvalue = winprotect(highchance, lowchance);
@@ -118,6 +121,7 @@ function botchoice(uservalue) {
                 else if (ids['seven'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['six'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
                 else if (ids['nine'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (cornerv[0]) { value = cornerv[1]; }
                 else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['four'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
                 else if (ids['eight'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
@@ -125,6 +129,7 @@ function botchoice(uservalue) {
                 return value;
             },
             seven: function () {
+                var cornerv = cornercheck();
                 var highchance = ['five', 'four', 'eight'];
                 var lowchance = ['one', 'nine'];
                 var passvalue = winprotect(highchance, lowchance);
@@ -137,6 +142,7 @@ function botchoice(uservalue) {
                 else if (ids['three'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['four'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
                 else if (ids['one'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
+                else if (cornerv[0]) { value = cornerv[1]; }
                 else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['six'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
                 else if (ids['two'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
@@ -145,6 +151,7 @@ function botchoice(uservalue) {
                 return value;
             },
             nine: function () {
+                var cornerv = cornercheck();
                 var highchance = ['five', 'six', 'eight'];
                 var lowchance = ['three', 'seven'];
                 var passvalue = winprotect(highchance, lowchance);
@@ -157,6 +164,7 @@ function botchoice(uservalue) {
                 else if (ids['one'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['six'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
                 else if (ids['three'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (cornerv[0]) { value = cornerv[1]; }
                 else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['four'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
                 else if (ids['two'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
@@ -165,6 +173,7 @@ function botchoice(uservalue) {
                 return value;
             },
             two: function () {
+                var cornerv = cornercheck();
                 var highchance = ['five', 'one', 'three'];
                 var lowchance = ['four', 'six'];
                 var passvalue = winprotect(highchance, lowchance);
@@ -177,6 +186,7 @@ function botchoice(uservalue) {
                 else if (ids['eight'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['six'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
                 else if (ids['four'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (cornerv[0]) { value = cornerv[1]; }
                 else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['nine'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
                 else if (ids['seven'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
@@ -185,6 +195,7 @@ function botchoice(uservalue) {
                 return value;
             },
             four: function () {
+                var cornerv = cornercheck();
                 var highchance = ['five', 'one', 'seven'];
                 var lowchance = ['two', 'eight'];
                 var passvalue = winprotect(highchance, lowchance);
@@ -197,7 +208,7 @@ function botchoice(uservalue) {
                 else if (ids['six'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['two'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
                 else if (ids['eight'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
-                
+                else if (cornerv[0]) { value = cornerv[1]; }
                 else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['nine'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
                 else if (ids['three'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
@@ -206,6 +217,7 @@ function botchoice(uservalue) {
                 return value;
             },
             six: function () {
+                var cornerv = cornercheck();
                 var highchance = ['five', 'three', 'nine'];
                 var lowchance = ['two', 'eight'];
                 var passvalue = winprotect(highchance, lowchance);
@@ -218,6 +230,7 @@ function botchoice(uservalue) {
                 else if (ids['four'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['two'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
                 else if (ids['eight'] === 'X' && (ids['two'] !== 'O' && ids['nine'] !== 'X')) { value = 'two'; }
+                else if (cornerv[0]) { value = cornerv[1]; }
                 else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['one'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
                 else if (ids['seven'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
@@ -226,6 +239,7 @@ function botchoice(uservalue) {
                 return value;
             },
             eight: function () {
+                var cornerv = cornercheck();
                 var highchance = ['five', 'seven', 'nine'];
                 var lowchance = ['four', 'six'];
                 var passvalue = winprotect(highchance, lowchance);
@@ -238,6 +252,7 @@ function botchoice(uservalue) {
                 else if (ids['two'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
                 else if (ids['six'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
                 else if (ids['four'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (cornerv[0]) { value = cornerv[1]; }
                 else if (passvalue[0]) { value = passvalue[1]; }
                 else if (ids['three'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
                 else if (ids['one'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
@@ -381,18 +396,24 @@ function rand() {
 
 function winprotect(hchance, lchance){
 
-    var hcopy = hchance;
-    var lcopy = lchance;
+    var hcopy = [];
+    var lcopy = [];
     var hcounter = 3;
     var lcounter = 2;
 
     for(var i = 0; i < 3; i++)
     {
-        if (ids[hchance[i]] === 'X' || ids[hchance[i]] === 'O'){
-            hcopy.splice(i, 1);
+        if (ids[hchance[i]] !== 'X' && ids[hchance[i]] !== 'O'){
+            hcopy.push(hchance[i]);
+        }
+        else{
             hcounter--;
         }
+
+        console.log('hchance' + hchance);
     }  
+
+    console.log('hcopy ' + hcopy);
 
     if(hcounter > 0) {
         var protect = Math.floor(Math.random() * hcounter);
@@ -401,8 +422,10 @@ function winprotect(hchance, lchance){
     }
     else{
         for(var i = 0; i< 2; i++) {
-            if (ids[lchance[i]] === 'X' || ids[lchance[i]] === 'O') {
-                lcopy.splice(i, 1);
+            if (ids[lchance[i]] !== 'X' && ids[lchance[i]] !== 'O') {
+                lcopy.push(lchance[i]);          
+            }
+            else {
                 lcounter--;
             }
         }
@@ -418,18 +441,44 @@ function winprotect(hchance, lchance){
 
 function pandav(){
     var pandavlist = ['one', 'three', 'seven', 'nine'];
-    var pcopy = pandavlist;
-    var pandavcounter = 4
+    var pcopy = [];
+    var pandavcounter = 4;
     for (var i = 0; i < 4; i++) {
-        if (ids[pandavlist[i]] === 'X' || ids[pandavlist[i]] === 'O') {
-            pcopy.splice(i, 1);
+        if (ids[pandavlist[i]] !== 'X' && ids[pandavlist[i]] !== 'O') {
+            pcopy.push(pandavlist[i]);
+        }
+        else {
             pandavcounter--;
         }
     }
 
+    console.log('pcopy ' + pcopy);
+
     if (pandavcounter > 0) {
         var pandu = Math.floor(Math.random() * pandavcounter);
         value = pcopy[pandu];
+        return [true, value];
+    }
+
+    return [false, null];
+}
+
+function cornercheck(){
+    var corner = ['one', 'three', 'seven', 'nine'];
+    var clist = [];
+    var cornercounter = 4;
+    for (var i = 0; i < 4; i++) {
+        if (ids[corner[i]] !== 'X' && ids[corner[i]] !== 'O') {
+            clist.push(corner[i]);
+        }
+        else {
+            cornercounter--;
+        }
+    }
+
+    if (cornercounter > 0 && ids['five'] === 'X') {
+        var cornerrand = Math.floor(Math.random() * cornercounter);
+        value = clist[cornerrand];
         return [true, value];
     }
 
