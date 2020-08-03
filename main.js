@@ -338,10 +338,11 @@ function winbot() {
 function rand() {
     var value;
     var lrand = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-    for (var i = 0; i < 9; i++){
-        if(ids[lrand[i]] !== 'X' && ids[lrand[i]] !== 'O')
+    while(true){
+        var botc = Math.floor(Math.random()*9);
+        if (ids[lrand[botc]] !== 'X' && ids[lrand[botc]] !== 'O')
         {
-            value = lrand[i];
+            value = lrand[botc];
             break;
         }
     }
