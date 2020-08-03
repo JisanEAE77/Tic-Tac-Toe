@@ -1,34 +1,34 @@
-var one = 1;
-var two = 2;
-var three = 3;
-var four = 4;
-var five = 5;
-var six = 6;
-var seven = 7;
-var eight = 8;
-var nine = 9;
-var TicTacToe = ["0", "0", "0", "0", "0", "0", "0", "0", "0"];
-var result = [[one, two, three], [four, five, six], [seven, eight, nine], [one, four, seven], [two, five, eight], [three, six, nine], [one, five, nine], [three, five, seven]];
+var ids = {
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9
+}
+var result = [[ids['one'], ids['two'], ids['three']], [ids['four'], ids['five'], ids['six']], [ids['seven'], ids['eight'], ids['nine']], [ids['one'], ids['four'], ids['seven']], [ids['two'], ids['five'], ids['eight']], [ids['three'], ids['six'], ids['nine']], [ids['one'], ids['five'], ids['nine']], [ids['three'], ids['five'], ids['seven']]];
 var hit = "X";
 var player = 0;
 var counter = 0;
 var gameover = false;
 var player1 = prompt("Enter the name of Player 1:");
-var player2 = prompt("Enter the name of player 2:");
+var player2 = 'Computer Bot';
 
 document.getElementById("player").innerHTML = "Player 1: " + player1 + "<br>" + "Player 2: " + player2;
 
-function play1() {
+function play(userchoice) {
     if (!gameover) {
-
-        if (TicTacToe[0] === "0") {
+        var bcheck = true;
+        if (ids[userchoice.id] !== "X" && ids[userchoice.id] !== "O") {
+            ids[userchoice.id] = hit;
             counter++;
-            var span = document.getElementById("one").innerHTML = hit;
-            one = hit;
-            TicTacToe[0] = hit;
+            userchoice.innerHTML = hit;
             if (hit === "X") {
                 hit = "O";
-                document.getElementById("move").innerHTML = "2nd Player's Turn!"
+                document.getElementById("move").innerHTML = "Computer Bots' Turn!"
             }
             else {
                 hit = "X";
@@ -38,10 +38,222 @@ function play1() {
 
         }
         else {
+            bcheck = false;
             alert("The box is already played, try again in a empty box");
         }
 
-        var result = [[one, two, three], [four, five, six], [seven, eight, nine], [one, four, seven], [two, five, eight], [three, six, nine], [one, five, nine], [three, five, seven]];
+        var result = [[ids['one'], ids['two'], ids['three']], [ids['four'], ids['five'], ids['six']], [ids['seven'], ids['eight'], ids['nine']], [ids['one'], ids['four'], ids['seven']], [ids['two'], ids['five'], ids['eight']], [ids['three'], ids['six'], ids['nine']], [ids['one'], ids['five'], ids['nine']], [ids['three'], ids['five'], ids['seven']]];
+
+
+        for (var i = 0; i <= 7; i++) {
+            if (result[i][0] === result[i][1] && result[i][1] === result[i][2]) {
+                bcheck = false;
+                gameover = true;
+                if (hit === "X") {
+                    hit = "O";
+                    player = player2;
+                }
+                else {
+                    hit = "X";
+                    player = player1;
+                }
+
+                document.getElementById("result").innerHTML = "Game over! Restart the game to play again.";
+
+                document.getElementById("move").innerHTML = player + " has won the game";
+
+                return 0;
+            }
+        }
+
+        if (counter === 9) {
+            bcheck = false;
+            gameover = true;
+            document.getElementById("result").innerHTML = "Game over! Restart the game to play again.";
+
+            document.getElementById("move").innerHTML = "Match Drawn, No one has won the game";
+
+        }
+
+        if (bcheck) {
+            
+        }
+        botchoice(userchoice);
+    }
+}
+
+function botchoice(uservalue) {
+    if (!gameover) {
+        var dict = {
+            one: function () {
+                var value;
+                var wlist = winbot();
+                if (wlist[0]) { value = wlist[1]; }
+                else if (ids['three'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
+                else if (ids['two'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
+                else if (ids['five'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
+                else if (ids['nine'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
+                else if (ids['four'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
+                else if (ids['seven'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
+                else if (ids['eight'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (ids['six'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
+                else { value = rand(); }
+
+                return value;
+            },
+            three: function () {
+                var value;
+                var wlist = winbot();
+                if (wlist[0]) { value = wlist[1]; }
+                else if (ids['one'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
+                else if (ids['two'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
+                else if (ids['five'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
+                else if (ids['seven'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
+                else if (ids['six'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
+                else if (ids['nine'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (ids['four'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
+                else if (ids['eight'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
+                else { value = rand(); }
+                return value;
+            },
+            seven: function () {
+                var value;
+                var wlist = winbot();
+                if (wlist[0]) { value = wlist[1]; }
+                else if (ids['eight'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
+                else if (ids['nine'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
+                else if (ids['five'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
+                else if (ids['three'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
+                else if (ids['four'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
+                else if (ids['one'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
+                else if (ids['six'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
+                else if (ids['two'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else { value = rand(); }
+
+                return value;
+            },
+            nine: function () {
+                var value;
+                var wlist = winbot();
+                if (wlist[0]) { value = wlist[1]; }
+                else if (ids['eight'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
+                else if (ids['seven'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
+                else if (ids['five'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
+                else if (ids['one'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
+                else if (ids['six'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
+                else if (ids['three'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (ids['four'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
+                else if (ids['two'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
+                else { value = rand(); }
+
+                return value;
+            },
+            two: function () {
+                var value;
+                var wlist = winbot();
+                if (wlist[0]) { value = wlist[1]; }
+                else if (ids['one'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
+                else if (ids['three'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
+                else if (ids['five'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
+                else if (ids['eight'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
+                else if (ids['six'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
+                else if (ids['four'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (ids['nine'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
+                else if (ids['seven'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
+                else { value = rand(); }
+
+                return value;
+            },
+            four: function () {
+                var value;
+                var wlist = winbot();
+                if (wlist[0]) { value = wlist[1]; }
+                else if (ids['one'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
+                else if (ids['seven'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
+                else if (ids['five'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (ids['six'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
+                else if (ids['two'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
+                else if (ids['eight'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
+                else if (ids['nine'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
+                else if (ids['three'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
+                else { value = rand(); }
+
+                return value;
+            },
+            six: function () {
+                var value;
+                var wlist = winbot();
+                if (wlist[0]) { value = wlist[1]; }
+                else if (ids['three'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
+                else if (ids['nine'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
+                else if (ids['five'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
+                else if (ids['four'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
+                else if (ids['two'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
+                else if (ids['eight'] === 'X' && (ids['two'] !== 'O' && ids['nine'] !== 'X')) { value = 'two'; }
+                else if (ids['one'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
+                else if (ids['seven'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
+                else { value = rand(); }
+
+                return value;
+            },
+            eight: function () {
+                var value;
+                var wlist = winbot();
+                if (wlist[0]) { value = wlist[1]; }
+                else if (ids['seven'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
+                else if (ids['nine'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
+                else if (ids['five'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
+                else if (ids['two'] === 'X' && (ids['five'] !== 'O' && ids['five'] !== 'X')) { value = 'five'; }
+                else if (ids['six'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
+                else if (ids['four'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (ids['three'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
+                else if (ids['one'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
+                else { value = rand(); }
+
+                return value;
+            },
+            five: function () {
+                var value;
+                var wlist = winbot();
+                if (wlist[0]) { value = wlist[1]; }
+                else if (ids['one'] === 'X' && (ids['nine'] !== 'O' && ids['nine'] !== 'X')) { value = 'nine'; }
+                else if (ids['nine'] === 'X' && (ids['one'] !== 'O' && ids['one'] !== 'X')) { value = 'one'; }
+                else if (ids['three'] === 'X' && (ids['seven'] !== 'O' && ids['seven'] !== 'X')) { value = 'seven'; }
+                else if (ids['seven'] === 'X' && (ids['three'] !== 'O' && ids['three'] !== 'X')) { value = 'three'; }
+                else if (ids['six'] === 'X' && (ids['four'] !== 'O' && ids['four'] !== 'X')) { value = 'four'; }
+                else if (ids['four'] === 'X' && (ids['six'] !== 'O' && ids['six'] !== 'X')) { value = 'six'; }
+                else if (ids['eight'] === 'X' && (ids['two'] !== 'O' && ids['two'] !== 'X')) { value = 'two'; }
+                else if (ids['two'] === 'X' && (ids['eight'] !== 'O' && ids['eight'] !== 'X')) { value = 'eight'; }
+                else { value = rand(); }
+                return value;
+            }
+        };
+        var botplay;
+        if (counter === 1 && ids['five'] != 'X') {
+            botplay = 'five';
+        } else {
+            botplay = dict[uservalue.id]();
+        }
+
+        console.log(botplay);
+
+        if (ids[botplay] !== "X" && ids[botplay] !== "O") {
+            ids[botplay] = hit;
+            counter++;
+            document.getElementById(botplay).innerHTML = hit;
+            if (hit === "X") {
+                hit = "O";
+                document.getElementById("move").innerHTML = "Computer Bots' Turn!"
+            }
+            else {
+                hit = "X";
+                document.getElementById("move").innerHTML = "1st Player's Turn!"
+
+            }
+
+        }
+
+        var result = [[ids['one'], ids['two'], ids['three']], [ids['four'], ids['five'], ids['six']], [ids['seven'], ids['eight'], ids['nine']], [ids['one'], ids['four'], ids['seven']], [ids['two'], ids['five'], ids['eight']], [ids['three'], ids['six'], ids['nine']], [ids['one'], ids['five'], ids['nine']], [ids['three'], ids['five'], ids['seven']]];
 
 
         for (var i = 0; i <= 7; i++) {
@@ -56,9 +268,9 @@ function play1() {
                     player = player1;
                 }
 
-                document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
+                document.getElementById("result").innerHTML = "Game over! Restart the game to play again.";
 
-                document.getElementById("result").innerHTML = player + " has won the game";
+                document.getElementById("move").innerHTML = player + " has won the game";
 
                 return 0;
             }
@@ -66,478 +278,73 @@ function play1() {
 
         if (counter === 9) {
             gameover = true;
-            document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
+            document.getElementById("result").innerHTML = "Game over! Restart the game to play again.";
 
-            document.getElementById("result").innerHTML = "Match Drawn, No one has won the game";
+            document.getElementById("move").innerHTML = "Match Drawn, No one has won the game";
 
         }
+
+        console.log(ids[botplay]);
+
     }
 }
 
-function play2() {
-    if (!gameover) {
+function winbot() {
 
+    var value;
+    var ck = true;
 
-        if (TicTacToe[1] === "0") {
-            counter++;
-            var span = document.getElementById("two").innerHTML = hit;
-            two = hit;
-            TicTacToe[1] = hit;
-            if (hit === "X") {
-                hit = "O";
-                document.getElementById("move").innerHTML = "2nd Player's Turn!"
+    if ((ids['one'] === 'O' && ids['two'] === 'O') && ids['three'] !== 'X') { value = 'three'; }
+    else if ((ids['one'] === 'O' && ids['three'] === 'O') && ids['two'] !== 'X') { value = 'two'; }
+    else if ((ids['two'] === 'O' && ids['three'] === 'O') && ids['one'] !== 'X') { value = 'one'; }
 
-            }
-            else {
-                hit = "X";
-                document.getElementById("move").innerHTML = "1st Player's Turn!"
+    else if ((ids['one'] === 'O' && ids['five'] === 'O') && ids['nine'] !== 'X') { value = 'nine'; }
+    else if ((ids['one'] === 'O' && ids['nine'] === 'O') && ids['five'] !== 'X') { value = 'five'; }
+    else if ((ids['five'] === 'O' && ids['nine'] === 'O') && ids['one'] !== 'X') { value = 'one'; }
 
-            }
+    else if ((ids['one'] === 'O' && ids['four'] === 'O') && ids['seven'] !== 'X') { value = 'seven'; }
+    else if ((ids['one'] === 'O' && ids['seven'] === 'O') && ids['four'] !== 'X') { value = 'four'; }
+    else if ((ids['four'] === 'O' && ids['seven'] === 'O') && ids['one'] !== 'X') { value = 'one'; }
 
-        }
-        else {
-            alert("The box is already played, try again in a empty box");
-        }
+    else if ((ids['three'] === 'O' && ids['six'] === 'O') && ids['nine'] !== 'X') { value = 'nine'; }
+    else if ((ids['three'] === 'O' && ids['nine'] === 'O') && ids['six'] !== 'X') { value = 'six'; }
+    else if ((ids['six'] === 'O' && ids['nine'] === 'O') && ids['three'] !== 'X') { value = 'three'; }
 
-        var result = [[one, two, three], [four, five, six], [seven, eight, nine], [one, four, seven], [two, five, eight], [three, six, nine], [one, five, nine], [three, five, seven]];
+    else if ((ids['three'] === 'O' && ids['five'] === 'O') && ids['seven'] !== 'X') { value = 'seven'; }
+    else if ((ids['three'] === 'O' && ids['seven'] === 'O') && ids['five'] !== 'X') { value = 'five'; }
+    else if ((ids['five'] === 'O' && ids['seven'] === 'O') && ids['three'] !== 'X') { value = 'three'; }
 
+    else if ((ids['seven'] === 'O' && ids['eight'] === 'O') && ids['nine'] !== 'X') { value = 'nine'; }
+    else if ((ids['seven'] === 'O' && ids['nine'] === 'O') && ids['eight'] !== 'X') { value = 'eight'; }
+    else if ((ids['eight'] === 'O' && ids['nine'] === 'O') && ids['seven'] !== 'X') { value = 'seven'; }
 
-        for (var i = 0; i <= 7; i++) {
-            if (result[i][0] === result[i][1] && result[i][1] === result[i][2]) {
-                gameover = true;
-                if (hit === "X") {
-                    hit = "O";
-                    player = player2;
-                }
-                else {
-                    hit = "X";
-                    player = player1;
-                }
-                document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
+    else if ((ids['four'] === 'O' && ids['five'] === 'O') && ids['six'] !== 'X') { value = 'six'; }
+    else if ((ids['four'] === 'O' && ids['six'] === 'O') && ids['five'] !== 'X') { value = 'five'; }
+    else if ((ids['five'] === 'O' && ids['six'] === 'O') && ids['four'] !== 'X') { value = 'four'; }
 
-                document.getElementById("result").innerHTML = player + " has won the game";
+    else if ((ids['two'] === 'O' && ids['five'] === 'O') && ids['eight'] !== 'X') { value = 'eight'; }
+    else if ((ids['two'] === 'O' && ids['eight'] === 'O') && ids['five'] !== 'X') { value = 'five'; }
+    else if ((ids['five'] === 'O' && ids['eight'] === 'O') && ids['two'] !== 'X') { value = 'two'; }
 
-                return 0;
+    else { ck = false; value = null; }
 
-            }
-        }
+    var ulist = [ck, value];
 
-        if (counter === 9) {
-            gameover = true;
-            document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
+    console.log(ulist);
 
-            document.getElementById("result").innerHTML = "Match Drawn, No one has won the game";
-
-        }
-    }
+    return ulist;
 }
 
-function play3() {
-    if (!gameover) {
-
-
-        if (TicTacToe[2] === "0") {
-            counter++;
-            var span = document.getElementById("three").innerHTML = hit;
-            three = hit;
-            TicTacToe[2] = hit;
-            if (hit === "X") {
-                hit = "O";
-                document.getElementById("move").innerHTML = "2nd Player's Turn!"
-
-            }
-            else {
-                hit = "X";
-                document.getElementById("move").innerHTML = "1st Player's Turn!"
-
-            }
-
-        }
-        else {
-            alert("The box is already played, try again in a empty box");
-        }
-
-        var result = [[one, two, three], [four, five, six], [seven, eight, nine], [one, four, seven], [two, five, eight], [three, six, nine], [one, five, nine], [three, five, seven]];
-
-
-        for (var i = 0; i <= 7; i++) {
-            if (result[i][0] === result[i][1] && result[i][1] === result[i][2]) {
-                gameover = true;
-                if (hit === "X") {
-                    hit = "O";
-                    player = player2;
-                }
-                else {
-                    hit = "X";
-                    player = player1;
-                }
-                document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-                document.getElementById("result").innerHTML = player + " has won the game";
-
-                return 0;
-
-            }
-        }
-
-        if (counter === 9) {
-            gameover = true;
-            document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-            document.getElementById("result").innerHTML = "Match Drawn, No one has won the game";
-
+function rand() {
+    var value;
+    var lrand = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    for (var i = 0; i < 9; i++){
+        if(ids[lrand[i]] !== 'X' && ids[lrand[i]] !== 'O')
+        {
+            value = lrand[i];
+            break;
         }
     }
-}
 
-function play4() {
-    if (!gameover) {
-
-
-        if (TicTacToe[3] === "0") {
-            counter++;
-            var span = document.getElementById("four").innerHTML = hit;
-            four = hit;
-            TicTacToe[3] = hit;
-            if (hit === "X") {
-                hit = "O";
-                document.getElementById("move").innerHTML = "2nd Player's Turn!"
-
-            }
-            else {
-                hit = "X";
-                document.getElementById("move").innerHTML = "1st Player's Turn!"
-
-            }
-        }
-        else {
-            alert("The box is already played, try again in a empty box");
-        }
-
-        var result = [[one, two, three], [four, five, six], [seven, eight, nine], [one, four, seven], [two, five, eight], [three, six, nine], [one, five, nine], [three, five, seven]];
-
-
-        for (var i = 0; i <= 7; i++) {
-            if (result[i][0] === result[i][1] && result[i][1] === result[i][2]) {
-                gameover = true;
-                if (hit === "X") {
-                    hit = "O";
-                    player = player2;
-                }
-                else {
-                    hit = "X";
-                    player = player1;
-                }
-                document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-                document.getElementById("result").innerHTML = player + " has won the game";
-
-                return 0;
-
-            }
-        }
-
-        if (counter === 9) {
-            gameover = true;
-            document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-            document.getElementById("result").innerHTML = "Match Drawn, No one has won the game";
-
-        }
-    }
-}
-
-function play5() {
-    if (!gameover) {
-
-
-        if (TicTacToe[4] === "0") {
-            counter++;
-            var span = document.getElementById("five").innerHTML = hit;
-            five = hit;
-            TicTacToe[4] = hit;
-            if (hit === "X") {
-                hit = "O";
-                document.getElementById("move").innerHTML = "2nd Player's Turn!"
-
-            }
-            else {
-                hit = "X";
-                document.getElementById("move").innerHTML = "1st Player's Turn!"
-
-            }
-
-        }
-        else {
-            alert("The box is already played, try again in a empty box");
-        }
-
-        var result = [[one, two, three], [four, five, six], [seven, eight, nine], [one, four, seven], [two, five, eight], [three, six, nine], [one, five, nine], [three, five, seven]];
-
-
-        for (var i = 0; i <= 7; i++) {
-            if (result[i][0] === result[i][1] && result[i][1] === result[i][2]) {
-                gameover = true;
-                if (hit === "X") {
-                    hit = "O";
-                    player = player2;
-                }
-                else {
-                    hit = "X";
-                    player = player1;
-                }
-                document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-                document.getElementById("result").innerHTML = player + " has won the game";
-
-                return 0;
-
-            }
-        }
-
-        if (counter === 9) {
-            gameover = true;
-            document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-            document.getElementById("result").innerHTML = "Match Drawn, No one has won the game";
-
-        }
-    }
-}
-
-function play6() {
-    if (!gameover) {
-
-
-        if (TicTacToe[5] === "0") {
-            counter++;
-            var span = document.getElementById("six").innerHTML = hit;
-            six = hit;
-            TicTacToe[5] = hit;
-            if (hit === "X") {
-                hit = "O";
-                document.getElementById("move").innerHTML = "2nd Player's Turn!"
-
-            }
-            else {
-                hit = "X";
-                document.getElementById("move").innerHTML = "1st Player's Turn!"
-
-            }
-
-        }
-        else {
-            alert("The box is already played, try again in a empty box");
-        }
-
-        var result = [[one, two, three], [four, five, six], [seven, eight, nine], [one, four, seven], [two, five, eight], [three, six, nine], [one, five, nine], [three, five, seven]];
-
-
-        for (var i = 0; i <= 7; i++) {
-            if (result[i][0] === result[i][1] && result[i][1] === result[i][2]) {
-                gameover = true;
-                if (hit === "X") {
-                    hit = "O";
-                    player = player2;
-                }
-                else {
-                    hit = "X";
-                    player = player1;
-                }
-                document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-                document.getElementById("result").innerHTML = player + " has won the game";
-
-                return 0;
-
-            }
-        }
-
-        if (counter === 9) {
-            gameover = true;
-            document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-            document.getElementById("result").innerHTML = "Match Drawn, No one has won the game";
-
-        }
-    }
-}
-
-function play7() {
-    if (!gameover) {
-
-
-        if (TicTacToe[6] === "0") {
-            counter++;
-            var span = document.getElementById("seven").innerHTML = hit;
-            seven = hit;
-            TicTacToe[6] = hit;
-            if (hit === "X") {
-                hit = "O";
-                document.getElementById("move").innerHTML = "2nd Player's Turn!"
-
-            }
-            else {
-                hit = "X";
-                document.getElementById("move").innerHTML = "1st Player's Turn!"
-
-            }
-
-        }
-        else {
-            alert("The box is already played, try again in a empty box");
-        }
-
-        var result = [[one, two, three], [four, five, six], [seven, eight, nine], [one, four, seven], [two, five, eight], [three, six, nine], [one, five, nine], [three, five, seven]];
-
-
-        for (var i = 0; i <= 7; i++) {
-            if (result[i][0] === result[i][1] && result[i][1] === result[i][2]) {
-                gameover = true;
-                if (hit === "X") {
-                    hit = "O";
-                    player = player2;
-                }
-                else {
-                    hit = "X";
-                    player = player1;
-                }
-                document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-                document.getElementById("result").innerHTML = player + " has won the game";
-
-                return 0;
-
-            }
-        }
-
-        if (counter === 9) {
-            gameover = true;
-            document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-            document.getElementById("result").innerHTML = "Match Drawn, No one has won the game";
-
-        }
-    }
-}
-
-function play8() {
-    if (!gameover) {
-
-
-        if (TicTacToe[7] === "0") {
-            counter++;
-            var span = document.getElementById("eight").innerHTML = hit;
-            eight = hit;
-            TicTacToe[7] = hit;
-            if (hit === "X") {
-                hit = "O";
-                document.getElementById("move").innerHTML = "2nd Player's Turn!"
-
-            }
-            else {
-                hit = "X";
-                document.getElementById("move").innerHTML = "1st Player's Turn!"
-
-            }
-
-        }
-        else {
-            alert("The box is already played, try again in a empty box");
-        }
-
-
-        var result = [[one, two, three], [four, five, six], [seven, eight, nine], [one, four, seven], [two, five, eight], [three, six, nine], [one, five, nine], [three, five, seven]];
-
-
-        for (var i = 0; i <= 7; i++) {
-            if (result[i][0] === result[i][1] && result[i][1] === result[i][2]) {
-                gameover = true;
-                if (hit === "X") {
-                    hit = "O";
-                    player = player2;
-                }
-                else {
-                    hit = "X";
-                    player = player1;
-                }
-                document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-                document.getElementById("result").innerHTML = player + " has won the game";
-
-                return 0;
-
-            }
-        }
-
-        if (counter === 9) {
-            gameover = true;
-            document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-            document.getElementById("result").innerHTML = "Match Drawn, No one has won the game";
-
-        }
-    }
-}
-
-function play9() {
-    if (!gameover) {
-
-
-        if (TicTacToe[8] === "0") {
-            counter++;
-            var span = document.getElementById("nine").innerHTML = hit;
-            nine = hit;
-            TicTacToe[8] = hit;
-            if (hit === "X") {
-                hit = "O";
-                document.getElementById("move").innerHTML = "2nd Player's Turn!"
-
-            }
-            else {
-                hit = "X";
-                document.getElementById("move").innerHTML = "1st Player's Turn!"
-
-            }
-
-        }
-        else {
-            alert("The box is already played, try again in a empty box");
-        }
-
-        var result = [[one, two, three], [four, five, six], [seven, eight, nine], [one, four, seven], [two, five, eight], [three, six, nine], [one, five, nine], [three, five, seven]];
-
-
-        for (var i = 0; i <= 7; i++) {
-            if (result[i][0] === result[i][1] && result[i][1] === result[i][2]) {
-                gameover = true;
-                if (hit === "X") {
-                    hit = "O";
-                    player = player2;
-                }
-                else {
-                    hit = "X";
-                    player = player1;
-                }
-                document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-                document.getElementById("result").innerHTML = player + " has won the game";
-
-                return 0;
-
-            }
-        }
-
-        if (counter === 9) {
-            gameover = true;
-            document.getElementById("move").innerHTML = "Game over! Restart the game to play again.";
-
-            document.getElementById("result").innerHTML = "Match Drawn, No one has won the game";
-
-        }
-    }
-}
-
-function restart() { 
-    document.querySelectorAll(td).innerHTML = "<span class='hiodden'>0</span>";
+    return value;
 }
