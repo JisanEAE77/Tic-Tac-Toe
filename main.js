@@ -476,7 +476,7 @@ function cornercheck(){
         }
     }
 
-    if (cornercounter > 0) {
+    if (cornercounter > 0 && ids['five'] === 'X') {
         var cornerrand = Math.floor(Math.random() * cornercounter);
         value = clist[cornerrand];
         return [true, value];
